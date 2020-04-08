@@ -8,29 +8,32 @@ public class n4344 {
 
         int c = sc.nextInt();
         double[] avgArr = new double[c];
+        int n, sum, avg, count, score;
+        int[] arr;
 
-        for (int i=1 ; i <= c ; i++ ) {
-            int n = sc.nextInt();
-            int sum = 0;
-            int avg = 0;
-            int count = 0;
-            int[] arr = new int[n];
-            for (int j=1 ; j <= n ; j++) {
-                int score = sc.nextInt();
+        for (int i=0 ; i < c ; i++ ) {
+            n = sc.nextInt();
+            sum = 0;
+            count = 0;
+            arr = new int[n];
+            for (int j=0 ; j < n ; j++) {
+                score = sc.nextInt();
+                arr[j] = score;
                 sum += score;
-                arr[j-1] = score;
-                avg = sum / n;
             }
+            avg = sum / n;
             for (int h=0 ; h < n ; h++) {
                 if (arr[h] > avg) {
                     count ++;
                 }
             }
-            avgArr[i-1] = (double) count / (double)n ;
+            avgArr[i] = (double) count / (double)n ;
         }
 
         for (double v : avgArr) {
             System.out.printf("%.3f%%\n", v * 100);
         }
+
+        sc.close();
     }
 }
