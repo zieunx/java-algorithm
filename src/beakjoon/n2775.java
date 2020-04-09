@@ -1,7 +1,7 @@
 package beakjoon;
 
 import java.util.Scanner;
-
+// 잔디 심기 적용을 위한 커밋 테스트
 public class n2775 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
