@@ -2,6 +2,10 @@ package beakjoon;
 
 import java.util.Scanner;
 
+/*
+틀린 문제.
+TODO: 틀린 이유 찾아야 함.
+* */
 public class n2839 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
