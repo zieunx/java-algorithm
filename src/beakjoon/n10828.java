@@ -36,6 +36,7 @@ public class n10828 {
             }
             N--;
         }
+        sc.close();
     }
 
     public static void push(int x) {

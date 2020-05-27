@@ -17,6 +17,7 @@ public class n10250 {
 
             System.out.println(X * 100 + Y);
         }
+        sc.close();
     }
 }
 /*
@@ -64,6 +65,6 @@ X = N - (H * (Y-1))
 Y = (int) Math.ceil((double) N / (double)H);
 X = N - (H * (Y -1));
 ```
-
+> Math.ceil() 메서드 : 올림
 */
 

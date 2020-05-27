@@ -23,6 +23,6 @@ public class n9498 {
         }
 
         System.out.print(grade);
-
+        sc.close();
     }
 }

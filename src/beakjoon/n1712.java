@@ -15,5 +15,6 @@ public class n1712 {
         } else {
             System.out.println((int) Math.floor(((double) A / (double) (C-B))+1));
         }
+        sc.close();
     }
 }

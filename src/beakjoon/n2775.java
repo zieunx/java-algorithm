@@ -17,6 +17,7 @@ public class n2775 {
         for (int i=0; i< testCase ;i++) {
             System.out.println(answer[i]);
         }
+        sc.close();
     }
     static int cal(int k, int n) {
         if (n == 1) {

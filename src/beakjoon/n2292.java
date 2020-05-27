@@ -8,6 +8,7 @@ public class n2292 {
         Scanner sc = new Scanner(System.in);
 
         System.out.println(getStep(sc.nextInt()));
+        sc.close();
     }
     static int getStep(int n) {
         int step = 1;

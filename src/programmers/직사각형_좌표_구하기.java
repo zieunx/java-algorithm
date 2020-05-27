@@ -1,6 +1,5 @@
 package programmers;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -53,6 +52,7 @@ public class 직사각형_좌표_구하기 {
 
         System.out.println(Arrays.toString(answer));
         // return answer;
+        sc.close();
     }
     private static int getKey(int[][] v, int n) {
         if (v[0][n] == v[1][n]) {

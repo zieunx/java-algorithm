@@ -1,8 +1,6 @@
 package beakjoon;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class n10818 {
     public static void main(String[] args) {
@@ -22,5 +20,6 @@ public class n10818 {
         }
 
         System.out.println(min +  " " + max);
+        sc.close();
     }
 }

@@ -22,6 +22,7 @@ public class n1193 {
         } else {
             System.out.println(num + "/" + ((n+1)-num));
         }
+        sc.close();
     }
     static int getSum(int n) {
         if (n == 1) {
