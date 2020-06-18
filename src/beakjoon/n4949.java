@@ -21,7 +21,7 @@ public class n4949 {
 
                 boolean isNotBlanck = c != '(' &&  c != ')' && c != '[' && c != ']';
                 boolean isStart = c == '(' || c == '[';
-                boolean isEmptyOrNotCouple = stack.empty() || (stack.peek() != '(' && c == ')') || (stack.peek() != '[' && c == ']');
+                boolean isNotCouple = (stack.peek() != '(' && c == ')') || (stack.peek() != '[' && c == ']');
 
                 if (isNotBlanck) {
                     continue;
@@ -30,7 +30,7 @@ public class n4949 {
                     stack.push(c);
                     continue;
                 } else { // 닫힘괄호
-                    if (isEmptyOrNotCouple) {
+                    if (stack.empty() || isNotCouple) {
                         stack.push('('); // * 방어코드 *
                         break;
                     }
