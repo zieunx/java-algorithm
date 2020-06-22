@@ -16,9 +16,8 @@ public class n4949 {
             if (sentence.equals(".")) {
                 break;
             }
-            for (int i = 0; i < sentence.length(); i++) {
-                char c = sentence.charAt(i);
-
+            for (char c : sentence.toCharArray()) {
+                // char c = sentence.charAt(i);
                 boolean isNotBlanck = c != '(' &&  c != ')' && c != '[' && c != ']';
                 boolean isStart = c == '(' || c == '[';
                 boolean isNotCouple = (stack.peek() != '(' && c == ')') || (stack.peek() != '[' && c == ']');
@@ -29,13 +28,13 @@ public class n4949 {
                 if (isStart) { // 열림괄호
                     stack.push(c);
                     continue;
-                } else { // 닫힘괄호
-                    if (stack.empty() || isNotCouple) {
-                        stack.push('('); // * 방어코드 *
-                        break;
-                    }
-                    stack.pop();
                 }
+                // 닫힘괄호
+                if (stack.empty() || isNotCouple) {
+                    stack.push('('); // * 방어코드 *
+                    break;
+                }
+                stack.pop();
             }
 
             System.out.println(stack.empty() ? "yes" : "no");
