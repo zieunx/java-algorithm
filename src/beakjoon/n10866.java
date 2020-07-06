@@ -13,7 +13,6 @@ public class n10866 {
         int N = Integer.parseInt(reader.readLine());
 
         for (int i=0; i < N; i++) {
-//            System.out.println("==========" + (i+1) + "==========");
             String text = reader.readLine();
 
             if (text.contains("push_front")) {
@@ -23,22 +22,16 @@ public class n10866 {
                 arr =  text.split(" ");
                 d.push_back(Integer.parseInt(arr[1]));
             } else if (text.contains("pop_front")) {
-//                System.out.print(d.pop_front() + "\n");
                 writer.write(d.pop_front() + "\n");
             } else if (text.contains("pop_back")) {
-//                System.out.print(d.pop_back() + "\n");
                 writer.write(d.pop_back() + "\n");
             } else if (text.contains("size")) {
-//                System.out.print(d.size() + "\n");
                 writer.write(d.size() + "\n");
             } else if (text.contains("empty")) {
-//                System.out.print((d.empty() ? 1 : 0) + "\n");
                 writer.write((d.empty() ? 1 : 0) + "\n");
             } else if (text.contains("front")) {
-//                System.out.print(d.front() + "\n");
                 writer.write(d.front() + "\n");
             } else if (text.contains("back")) {
-//                System.out.print(d.back() + "\n");
                 writer.write(d.back() + "\n");
             }
         }
@@ -66,7 +59,6 @@ public class n10866 {
             }
             this.frontNode = this.currentNode;
             this.size++;
-//            System.out.println("[push_front] size : " + size + " / front : {" + frontNode.prev +  ", " +frontNode.n + ", " + frontNode.next + "} / back : {" + backNode.prev +  ", " +backNode.n + ", " + backNode.next + "}");
         }
 
         void push_back(int X) {
