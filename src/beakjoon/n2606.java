@@ -12,7 +12,7 @@ public class n2606 {
     static List<List<Integer>> graph = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
-//        List<List<Integer>> graph = new ArrayList<>();
+        // graph 빈배열로 초기화
         for (int i=0; i <= 100; i++) {
             graph.add(new ArrayList<>());
         }
@@ -24,7 +24,6 @@ public class n2606 {
         int linkedCount = Integer.parseInt(reader.readLine());
 
         int currentNode;
-//        int[] linkedNodes;
         List<Integer> linkedNodes;
         int virus = -1;
 
@@ -36,7 +35,7 @@ public class n2606 {
                     .mapToInt(Integer::parseInt).toArray();
             setLinkedComputer(couple[0], couple[1]);
         }
-//        System.out.println("> 입력 그래프 : " + graph);
+
         stack.push(1);
 
         while (!stack.isEmpty()) {
@@ -53,7 +52,6 @@ public class n2606 {
             }
         }
 
-//        System.out.println("\n virus 크기 : " + virus);
         writer.write(virus + "\n");
         writer.flush();
 
