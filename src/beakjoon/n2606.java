@@ -59,11 +59,6 @@ public class n2606 {
         writer.close();
     }
     static void setLinkedComputer (int a, int b) {
-        // 2차원 배열일 때
-//        int graphSize = graph[a].length;
-//        graph[a][graphSize + 1] = b;
-
-        // List 2차원 배열 일 때
         graph.get(a).add(b);
         graph.get(b).add(a);
     }
