@@ -8,7 +8,7 @@ public class n10828_2 {
 
         Scanner sc = new Scanner(System.in);
 
-        Stack stack = new Stack(new int[10000]);
+        Stack10828 stack = new Stack10828(new int[10000]);
         int N = sc.nextInt();
 
         for (int i=0; i<=N; i++) {
@@ -32,11 +32,11 @@ public class n10828_2 {
     }
 }
 
-class Stack {
+class Stack10828 {
     int[] arr;
     int size=0;
 
-    public Stack (int[] arr) {
+    public Stack10828 (int[] arr) {
         this.arr = arr;
     }
 
