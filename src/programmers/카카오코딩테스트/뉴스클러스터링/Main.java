@@ -1,4 +1,4 @@
-package programmers.뉴스클러스터링;
+package programmers.카카오코딩테스트.뉴스클러스터링;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,8 +11,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        String str1 = "FRANCE";
-        String str2 = "french";
+        String str1 = "A*B*C";
+        String str2 = "B*B*C";
 
         int result = solution(str1, str2);
 
