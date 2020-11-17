@@ -26,10 +26,9 @@ Change uid4567 Ryan
     }
 
     public static String[] solution(String[] record) {
-        String[] answer = {};
-
+        String[] answer;
+        int answerSize = 0;
         Map<String, String> nicknameMap = new HashMap<>();
-        List<String> answerList = new ArrayList<>();
 
         for (String request : record) {
             String[] requestArray = request.split(" ");
@@ -40,14 +39,25 @@ Change uid4567 Ryan
 
             switch (action) {
                 case "Enter":
+                    answerSize++;
+                    // uid - nickname 데이터 추가
+                    nickname = requestArray[2];
+                    nicknameMap.put(uid,nickname);
+                    break;
                 case "Change":
                     // uid - nickname 데이터 추가
                     nickname = requestArray[2];
                     nicknameMap.put(uid,nickname);
                     break;
+                case "Leave":
+                    answerSize++;
+                    break;
             }
         }
 
+        answer = new String[answerSize];
+
+        int index = 0;
         for (String request : record) {
             String[] requestArray = request.split(" ");
 
@@ -56,11 +66,11 @@ Change uid4567 Ryan
                 String uid = requestArray[1];
                 String nickname = nicknameMap.get(uid);
 
-                answerList.add(nickname + ("Enter".equals(action) ? "님이 들어왔습니다." :"님이 나갔습니다."));
+                answer[index] = nickname + ("Enter".equals(action) ? "님이 들어왔습니다." :"님이 나갔습니다.");
+
+                index++;
             }
         }
-
-        answer = answerList.toArray(new String[0]);
 
         return answer;
     }
