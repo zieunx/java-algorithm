@@ -26,10 +26,10 @@ Change uid4567 Ryan
     }
 
     public static String[] solution(String[] record) {
-        String[] answer;
+        String[] answer = {};
 
         Map<String, String> nicknameMap = new HashMap<>();
-        List<Map<String, String>> chatting = new ArrayList<>();
+        List<String> answerList = new ArrayList<>();
 
         for (String request : record) {
             String[] requestArray = request.split(" ");
@@ -40,44 +40,28 @@ Change uid4567 Ryan
 
             switch (action) {
                 case "Enter":
-                    // 채팅 로우 추가
-                    addChattingRow(requestArray, chatting);
+                case "Change":
                     // uid - nickname 데이터 추가
                     nickname = requestArray[2];
                     nicknameMap.put(uid,nickname);
                     break;
-                case "Leave":
-                    // 채팅 로우 추가
-                    addChattingRow(requestArray, chatting);
-                    break;
-                case "Change":
-                    // uid - nickname 데이터 추가
-                    nickname = requestArray[2];
-                    nicknameMap.put(uid, nickname);
-                    break;
             }
         }
 
-        // List to Array
-        answer = new String[chatting.size()];
-        for (int i = 0; i < chatting.size(); i++) {
-            Map<String, String> row = chatting.get(i);
+        for (String request : record) {
+            String[] requestArray = request.split(" ");
 
-            String nickname = nicknameMap.get(row.get("uid"));
-            String actionText = "Enter".equals(row.get("action")) ? "님이 들어왔습니다." :"님이 나갔습니다.";
+            String action = requestArray[0];
+            if (!"Change".equals(action)) {
+                String uid = requestArray[1];
+                String nickname = nicknameMap.get(uid);
 
-            answer[i] = nickname + actionText;
+                answerList.add(nickname + ("Enter".equals(action) ? "님이 들어왔습니다." :"님이 나갔습니다."));
+            }
         }
 
-        return answer;
-    }
+        answer = answerList.toArray(new String[0]);
 
-    public static void addChattingRow(String[] requestArray, List<Map<String, String>> chatting) {
-        Map<String, String> row = new HashMap<>();
-        String action = requestArray[0];
-        String uid = requestArray[1];
-        row.put("uid", uid);
-        row.put("action", action);
-        chatting.add(row);
+        return answer;
     }
 }
