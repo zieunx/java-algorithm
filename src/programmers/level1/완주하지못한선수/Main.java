@@ -1,8 +1,6 @@
 package programmers.level1.완주하지못한선수;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -12,10 +10,10 @@ import java.util.stream.Collectors;
 public class Main {
 
     public static void main(String[] args) {
-        String[] participant = {"leo", "kiki", "eden"};
-        String[] completion = {"eden", "kiki"};
+        String[] participant = {"marina", "josipa", "nikola", "vinko", "filipa"};
+        String[] completion = {"josipa", "filipa", "marina", "nikola"};
 
-        System.out.println(solution(participant, completion));
+        System.out.println(solution_hash(participant, completion));
     }
 
     // participant 참여 선수들 1<= n <= 100,000
@@ -38,5 +36,35 @@ public class Main {
         return answer.equals("")
                 ? participantList.get(participantList.size() - 1)
                 : answer;
+    }
+
+    // participant 참여 선수들 1<= n <= 100,000
+    // completion 완주한 선수들 n - 1
+    public static String solution_hash(String[] participant, String[] completion) {
+        String answer = "";
+        Map<String, Integer> participantMap = new HashMap<>();
+
+        for(int i = 0; i < participant.length; i++) {
+            int count = 1;
+            if (participantMap.containsKey(participant[i])) {
+                count = participantMap.get(participant[i]) + 1;
+            }
+            participantMap.put(participant[i], count);
+        }
+
+        for (String name : completion) {
+            int count = participantMap.get(name);
+            if (count == 1) {
+                participantMap.remove(name);
+            } else {
+                participantMap.replace(name, count - 1);
+            }
+        }
+
+        for (String name : participantMap.keySet()) {
+            answer = name;
+        }
+
+        return answer;
     }
 }
