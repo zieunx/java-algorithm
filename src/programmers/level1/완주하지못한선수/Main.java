@@ -44,12 +44,12 @@ public class Main {
         String answer = "";
         Map<String, Integer> participantMap = new HashMap<>();
 
-        for(int i = 0; i < participant.length; i++) {
+        for (String name : participant) {
             int count = 1;
-            if (participantMap.containsKey(participant[i])) {
-                count = participantMap.get(participant[i]) + 1;
+            if (participantMap.containsKey(name)) {
+                count = participantMap.get(name) + 1;
             }
-            participantMap.put(participant[i], count);
+            participantMap.put(name, count);
         }
 
         for (String name : completion) {
