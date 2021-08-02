@@ -7,31 +7,44 @@ import java.util.Stack;
 
 public class Solution {
     public static void main(String[] args) {
-        int[] progresses = {95, 90, 99, 99, 80, 99};
-        int[] speeds = {1, 1, 1, 1, 1, 1};
+        int[] progresses = {85, 88, 87};
+        int[] speeds = {1, 1, 1};
 
-        Integer[] solution = solution(progresses, speeds);
+        int[] solution = solution(progresses, speeds);
 
         Arrays.stream(solution).forEach(System.out::println);
     }
-    public static Integer[] solution(int[] progresses, int[] speeds) {
+
+    public static int[] solution(int[] progresses, int[] speeds) {
         List<Integer> answerList = new ArrayList<>();
         Stack<Integer> deploymentStack = new Stack<>();
 
-        int frontIssueDays = (100 - progresses[0]) / speeds[0];
-        deploymentStack.add(frontIssueDays);
+        for (int i = 0; i < progresses.length; i++) {
+            int progress = 100 - progresses[i];
+            int remainDays = (int) Math.ceil((double) progress / (double) speeds[i]);
 
-        for(int i = 1; i < progresses.length; i ++) {
-            int currentIssueDays = (100 - progresses[i]) / speeds[i];
-            if (frontIssueDays < currentIssueDays) {
+            if (deploymentStack.isEmpty()) {
+                deploymentStack.add(remainDays);
+            } else if (deploymentStack.peek() >= remainDays) {
+                deploymentStack.add(deploymentStack.peek());
+            } else if (deploymentStack.peek() < remainDays) {
                 answerList.add(deploymentStack.size());
                 deploymentStack.clear();
+                deploymentStack.add(remainDays);
             }
-            System.out.println(progresses[i] + "=>      " + "front : {" + frontIssueDays + "} / current : {" + currentIssueDays + "} = " + (frontIssueDays >= currentIssueDays) + " [stack] = " + deploymentStack);
-            frontIssueDays = currentIssueDays;
-            deploymentStack.add(frontIssueDays);
         }
 
-        return answerList.toArray(Integer[]::new);
+        if (!deploymentStack.isEmpty()) {
+            answerList.add(deploymentStack.size());
+            deploymentStack.clear();
+        }
+
+        int[] answers = new int[answerList.size()];
+
+        for (int i = 0; i < answerList.size(); i++) {
+            answers[i] = answerList.get(i);
+        }
+
+        return answers;
     }
 }
