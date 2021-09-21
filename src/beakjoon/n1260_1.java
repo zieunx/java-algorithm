@@ -2,9 +2,9 @@ package beakjoon;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.stream.Collectors;
 
 // <연결된 배열 활용>
@@ -14,6 +14,7 @@ public class n1260_1 {
     static BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
     static StringBuffer stringBuffer = new StringBuffer();
 
+    static Queue<Integer> queue = new LinkedList<>();
     static boolean[] visited = {};
 
     public static void main(String[] args) throws IOException {
@@ -31,32 +32,51 @@ public class n1260_1 {
         writer.write(stringBuffer.toString().trim() + "\n");
 
         visited = new boolean[N];
-        writer.write(bfs(graph, V - 1));
+        stringBuffer = new StringBuffer();
+
+        queue.add(V - 1);
+        bfs(graph);
+        writer.write(stringBuffer.toString().trim() + "\n");
 
         writer.flush();
-
         writer.close();
         reader.close();
     }
 
     // 깊이 우선 탐색
-    private static void dfs(List<List<Integer>> graph, int currentNode) throws IOException {
+    private static void dfs(List<List<Integer>> graph, int currentNode) {
         visited[currentNode] = true;
         stringBuffer.append(currentNode + 1).append(" ");
 
-        List<Integer> currentLinkItems = graph.get(currentNode).stream().sorted().collect(Collectors.toList());
+        List<Integer> childrenItems = graph.get(currentNode).stream().sorted().collect(Collectors.toList());
 
-        for (Integer currentLinkItem : currentLinkItems) {
-            if (!visited[currentLinkItem]) {
-                dfs(graph, currentLinkItem);
+        for (Integer childItem : childrenItems) {
+            if (!visited[childItem]) {
+                dfs(graph, childItem);
             }
         }
     }
 
     // 너비 우선 탐색
-    private static int bfs(List<List<Integer>> graph, int V) {
+    private static void bfs(List<List<Integer>> graph) {
+        Integer currentNode = queue.poll();
 
-        return 0;
+        if (currentNode == null) {
+            return;
+        }
+
+        visited[currentNode] = true;
+        stringBuffer.append(currentNode + 1).append(" ");
+
+        List<Integer> childrenItems = graph.get(currentNode).stream().sorted().collect(Collectors.toList());
+
+        for (Integer child : childrenItems) {
+            if (!visited[child] && !queue.contains(child)) {
+                queue.add(child);
+            }
+        }
+
+        bfs(graph);
     }
 
 
