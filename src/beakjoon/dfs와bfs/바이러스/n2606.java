@@ -1,4 +1,4 @@
-package beakjoon;
+package beakjoon.dfs와bfs.바이러스;
 
 import java.io.*;
 import java.util.*;

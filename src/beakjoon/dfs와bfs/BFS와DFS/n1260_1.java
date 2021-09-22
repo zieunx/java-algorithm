@@ -1,4 +1,4 @@
-package beakjoon;
+package beakjoon.dfs와bfs.BFS와DFS;
 
 import java.io.*;
 import java.util.ArrayList;
