@@ -1,20 +1,17 @@
 package beakjoon.dfs와bfs.숨바꼭질;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 
 /*
 * 동생을 만나는 deph를 구하면 되는 문제
 * bfs를 사용
+*
+* fix: 리팩토링
+*   중복되는 코드를 수정하기 위해 child 노드를 리스트화 하여 for문 사용
+*   => 메모리와 시간을 더 사용하지만, 크게 문제되는 수준은 아니라고 판단.
 * */
 public class Main {
-
-    final static int MIN = 0;
-    final static int MAX = 0;
-
     static Map<Integer, Integer> visitedAndDepth = new HashMap<>();
     static Queue<Integer> queue = new LinkedList<>();
     static int second = 0;
@@ -51,24 +48,32 @@ public class Main {
             return;
         }
 
-        int minusSpot = current - 1;
-        int plusSpot = current + 1;
-        int doubleSpot = current * 2;
+        List<Integer> children = getChildrenSpot(current);
 
-        if (isNotVisited(minusSpot) && isInRange(minusSpot)) {
-            queue.add(minusSpot);
-            visitedAndDepth.put(minusSpot, nextDepth);
-        }
-        if (isNotVisited(plusSpot) && isInRange(plusSpot)) {
-            queue.add(plusSpot);
-            visitedAndDepth.put(plusSpot, nextDepth);
-        }
-        if (isNotVisited(doubleSpot) && isInRange(doubleSpot)) {
-            queue.add(doubleSpot);
-            visitedAndDepth.put(doubleSpot, nextDepth);
+        for (Integer child : children) {
+            if (canAddQueue(child)) {
+                addQueue(child, nextDepth);
+            }
         }
 
         findSisterByBfs(destination);
+    }
+
+    static List<Integer> getChildrenSpot(int current) {
+        List<Integer> children = new ArrayList<>();
+        children.add(current - 1);
+        children.add(current + 1);
+        children.add(current * 2);
+        return children;
+    }
+
+    static boolean canAddQueue(int n) {
+        return isNotVisited(n) && isInRange(n);
+    }
+
+    static void addQueue(int n, int depth) {
+        queue.add(n);
+        visitedAndDepth.put(n, depth);
     }
 
     static boolean isNotVisited(int n) {
