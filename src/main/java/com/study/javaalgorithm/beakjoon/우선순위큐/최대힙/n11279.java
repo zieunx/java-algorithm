@@ -1,4 +1,4 @@
-package com.study.javaalgorithm.beakjoon.우선순위큐;
+package com.study.javaalgorithm.beakjoon.우선순위큐.최대힙;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
