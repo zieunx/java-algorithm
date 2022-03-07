@@ -48,23 +48,23 @@ public class Solution {
 				maxDateTime = line.getEnd();
 			}
 		}
-
-		LocalDateTime currentDateTime = minDateTime;
-
-
 		for (Line currentLine : lineList) {
 			int currentCount = 0;
+			LocalDateTime rangeStart = currentLine.getEnd();
+			LocalDateTime rangeEnd = currentLine.getEnd().plusSeconds(1);
 
-			for (Line compareLine : lineList) {
-				boolean condition = true;
-				if (condition) {
+			for (Line compare : lineList) {
+				if (lineList.indexOf(currentLine) == lineList.indexOf(compare)) {
+					continue;
+				}
+				if ((rangeStart.isAfter(compare.getStart()) && rangeEnd.isBefore(compare.getStart())) ||
+					((rangeStart.isBefore(compare.getStart()) || rangeStart.isEqual(compare.getStart())) && rangeEnd.isAfter(compare.getEnd())) ||
+					(rangeStart.isAfter(compare.getStart()) && (rangeEnd.isEqual(compare.getEnd()) || rangeEnd.isAfter(compare.getEnd())))) {
 					currentCount = currentCount + 1;
 				}
 			}
 
 			answer = Math.max(answer, currentCount);
-
-			currentDateTime = currentDateTime.plusSeconds(1);
 		}
 
 		return answer;
