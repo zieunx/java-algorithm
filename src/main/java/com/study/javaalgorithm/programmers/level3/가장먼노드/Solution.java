@@ -1,7 +1,9 @@
 package com.study.javaalgorithm.programmers.level3.가장먼노드;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 
 class Solution {
@@ -24,25 +26,51 @@ class Solution {
 			tree[b].addNode(tree[a]);
 		}
 
-		tree[0].updateDepth(1);
+		Queue<Node> nodeQueue = new LinkedList<>();
 
-		answer = findLastNode(tree[0], tree[0].getDepth() + 1);
+		tree[0].visit(1);
+		nodeQueue.add(tree[0]);
+
+		answer = findLastNode(nodeQueue);
 
 		return answer;
 	}
 
-	public int findLastNode(Node node, int currentDepth) {
-		int max = currentDepth;
-		for (Node linkedNode : node.getLinkedNodes()) {
-			if (linkedNode.isNotVisited()) {
-				// 재귀호출
-				linkedNode.visit(currentDepth);
-				max = Math.max(currentDepth, findLastNode(linkedNode, currentDepth + 1));
+	// dfs
+	public int findLastNode(Queue<Node> nextNodes) {
+		int max = 1;
+
+		while (!nextNodes.isEmpty()) {
+			Node currentNode = nextNodes.poll();
+			max = Math.max(max, currentNode.getDepth());
+			System.out.println("current node : " + (currentNode.getN() + 1) + " / depth : " + currentNode.getDepth());
+
+			for (Node linkedNode : currentNode.getLinkedNodes()) {
+				if (linkedNode.isNotVisited()) {
+					System.out.println(" > linked node : " + (linkedNode.getN() + 1) + " / depth : " + currentNode.getDepth());
+					linkedNode.visit(currentNode.getDepth() + 1);
+					nextNodes.add(linkedNode);
+				}
 			}
 		}
 
 		return max;
 	}
+
+	/*
+	public int findLastNode(Node node, int currentDepth) {
+		int max = currentDepth;
+		System.out.println("current node : " + (node.getN() + 1) + " / depth : " + currentDepth);
+		for (Node linkedNode : node.getLinkedNodes()) {
+			// 재귀호출
+			System.out.println(" >> call linked node :" + linkedNode.getN());
+			linkedNode.visit(currentDepth);
+			max = Math.max(currentDepth, findLastNode(linkedNode, currentDepth + 1));
+		}
+
+		return max;
+	}
+	*/
 }
 
 class Node {
@@ -64,10 +92,6 @@ class Node {
 		return linkedNodes.keySet();
 	}
 
-	public void updateDepth(int depth) {
-		this.depth = depth;
-	}
-
 	public int getDepth() {
 		return depth;
 	}
@@ -77,6 +101,10 @@ class Node {
 	}
 
 	public void visit(int depth) {
-		this.depth = depth;
+		this.depth = Math.min(this.depth, depth);
+	}
+
+	public int getN() {
+		return n;
 	}
 }
