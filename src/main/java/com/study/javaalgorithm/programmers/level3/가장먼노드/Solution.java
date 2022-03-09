@@ -1,12 +1,10 @@
 package com.study.javaalgorithm.programmers.level3.가장먼노드;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Queue;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,7 +12,6 @@ import java.util.stream.Stream;
 
 class Solution {
 	public int solution(int n, int[][] edge) {
-		int answer = 0;
 
 		Node[] tree = new Node[n];
 		for (int i = 0; i < edge.length; i = i + 1) {
