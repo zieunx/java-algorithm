@@ -29,14 +29,20 @@ public class CacheTest {
 
         return Stream.of(
             new TestCase(3, new String[] {"Jeju", "Pangyo", "Seoul", "NewYork", "LA", "Jeju", "Pangyo", "Seoul", "NewYork", "LA"}, 50)
-            , new TestCase(3, new String[] {"Jeju", "Pangyo", "Seoul", "Jeju", "Pangyo", "Seoul", "Jeju", "Pangyo", "Seoul"}, 21)
-            , new TestCase(2, new String[] {"Jeju", "Pangyo", "Seoul", "NewYork", "LA", "SanFrancisco", "Seoul", "Rome", "Paris", "Jeju", "NewYork", "Rome"}, 60)
-            , new TestCase(5, new String[] {"Jeju", "Pangyo", "Seoul", "NewYork", "LA", "SanFrancisco", "Seoul", "Rome", "Paris", "Jeju", "NewYork", "Rome"}, 52)
-            , new TestCase(16, new String[] {"Jeju", "Pangyo", "NewYork", "newyork"}, 16)
-            , new TestCase(0, new String[] {"Jeju", "Pangyo", "Seoul", "NewYork", "LA"}, 25)
-            , new TestCase(1, new String[] {"Jeju", "Jeju", "Jeju", "Jeju", "Jeju", "Jeju", "Jeju", "Jeju"}, 12)
-            , new TestCase(10, new String[] {"Jeju", "Jeju", "Jeju", "Jeju", "Jeju", "Jeju", "Jeju", "Jeju"}, 12)
-            , new TestCase(0, new String[] {"Jeju", "Jeju", "Jeju", "Jeju", "Jeju", "Jeju", "Jeju", "Jeju"}, 40)
+                , new TestCase(3, new String[] {"Jeju", "Pangyo", "Seoul", "Jeju", "Pangyo", "Seoul", "Jeju", "Pangyo", "Seoul"}, 21)
+                , new TestCase(2, new String[] {"Jeju", "Pangyo", "Seoul", "NewYork", "LA", "SanFrancisco", "Seoul", "Rome", "Paris", "Jeju", "NewYork", "Rome"}, 60)
+                , new TestCase(5, new String[] {"Jeju", "Pangyo", "Seoul", "NewYork", "LA", "SanFrancisco", "Seoul", "Rome", "Paris", "Jeju", "NewYork", "Rome"}, 52)
+                , new TestCase(16, new String[] {"Jeju", "Pangyo", "NewYork", "newyork"}, 16)
+                , new TestCase(0, new String[] {"Jeju", "Pangyo", "Seoul", "NewYork", "LA"}, 25)
+                , new TestCase(1, new String[] {"Jeju", "Jeju", "Jeju", "Jeju", "Jeju", "Jeju", "Jeju", "Jeju"}, 12)
+                , new TestCase(10, new String[] {"Jeju", "Jeju", "Jeju", "Jeju", "Jeju", "Jeju", "Jeju", "Jeju"}, 12)
+                , new TestCase(0, new String[] {"Jeju", "Jeju", "Jeju", "Jeju", "Jeju", "Jeju", "Jeju", "Jeju"}, 40)
+//                , new TestCase(3, new String[] {"1", "2", "3", "2", "1", "2", "3"}, 19)
+//                , new TestCase(3, new String[] {"1", "2", "3", "2", "1", "2", "3"}, 19)
+//                , new TestCase(3, new String[] {"1", "2", "1"}, 11)
+                , new TestCase(3, new String[] {"1", "2", "1", "3", "4"}, 21)
+                , new TestCase(3, new String[] {"1", "3", "4", "1"}, 16)
+                , new TestCase(3, new String[] {"1", "2", "1", "3", "4", "1"}, 22)
         ).map(
                 it -> DynamicTest.dynamicTest(
                         "캐시 solution",

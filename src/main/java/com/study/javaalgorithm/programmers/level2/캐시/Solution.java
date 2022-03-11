@@ -11,6 +11,9 @@ public class Solution {
             cacheQueue.add(city.toLowerCase(Locale.ROOT));
         }
 
+        cacheQueue.printQueue();
+
+
         return cacheQueue.getDuringTime();
     }
 }
@@ -29,6 +32,8 @@ class CacheQueue<E> {
     }
 
     public void add(E key) {
+        printQueue();
+        System.out.println(" > key : " + key + "/ coutainKey ? " + keyMap.containsKey(key)  + " / +" + (keyMap.containsKey(key) ? 1 : 5));
         duringTime = keyMap.containsKey(key) ? duringTime + 1 : duringTime + 5;
 
         if (cacheSize == 0) {
@@ -45,9 +50,17 @@ class CacheQueue<E> {
 
         queue.add(key);
         keyMap.put(key, 0);
+        printQueue();
     }
 
     public int getDuringTime() {
         return duringTime;
+    }
+
+    public void printQueue() {
+        System.out.print("CacheQueue.printQueue ----> [");
+        queue.forEach(value -> System.out.print(value + ", "));
+        System.out.print("]");
+        System.out.println();
     }
 }
