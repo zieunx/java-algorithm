@@ -43,7 +43,7 @@ class CacheQueue<E> {
         if (!keyMap.containsKey(key) && queue.size() == cacheSize) {
             E poll = queue.poll();
             keyMap.remove(poll);
-        } else if (keyMap.containsKey(key) && queue.size() == cacheSize) {
+        } else if (keyMap.containsKey(key)) {
             queue.remove(key);
             keyMap.remove(key);
         }
