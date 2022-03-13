@@ -27,7 +27,8 @@ class SolutionTest {
 		final Solution solution = new Solution();
 
 		return Stream.of(
-			new TestCase(new int[] {}, new int[][] {}, 1)
+			new TestCase(new int[] {-5,0,2,1,2}, new int[][] {{0,1},{3,4},{2,3},{0,3}}, 9),
+			new TestCase(new int[] {0,1,0}, new int[][] {{0,1},{1,2}}, -1)
 		).map(
 			it -> DynamicTest.dynamicTest("solution",
 				() -> assertThat(solution.solution(it.a, it.adges)).isEqualTo(it.expected))
