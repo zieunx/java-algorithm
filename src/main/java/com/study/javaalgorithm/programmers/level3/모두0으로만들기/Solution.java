@@ -1,13 +1,14 @@
 package com.study.javaalgorithm.programmers.level3.모두0으로만들기;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
+
 
 public class Solution {
 	public long solution(int[] a, int[][] edges) {
-		long answer = -2;
-
 		if (weightSum(a) != 0) {
 			return -1;
 		}
@@ -29,18 +30,30 @@ public class Solution {
 			tree[y].addNode(tree[x]);
 		}
 
-		// bfs 호출
+		// queue 는 Leaf 로 초기화한다.
+		Queue<Node> nextNodes = new LinkedList<>();
 
-		return answer;
+		for (Node node : tree) {
+			if (node.getLinkedNodes().size() == 1 && node.getN() != 0) {
+				nextNodes.add(node);
+			}
+		}
+
+		return bfs(nextNodes);
 	}
 
-	public long findAddValue(Node node) {
+	public long bfs(Queue<Node> nextNodes) {
 		long count = 0;
-		for(Node linkNode : node.getLinkedNodes()) {
-			if (node.isNotVisited()) {
-				node.addWeight(linkNode.getWeight());
-				count = count + Math.abs(linkNode.getWeight());
-				node.visit();
+		while (!nextNodes.isEmpty()) {
+			Node currentNode = nextNodes.poll();
+			currentNode.visit();
+
+			for(Node parentNode : currentNode.getLinkedNodes()) {
+				if (parentNode.isNotVisited()) {
+					parentNode.addWeight(currentNode.getWeight());
+					count = count + Math.abs(currentNode.getWeight());
+					nextNodes.add(parentNode);
+				}
 			}
 		}
 
@@ -57,13 +70,15 @@ public class Solution {
 }
 
 class Node {
-	private long n;
+	private final long n;
+	private final Map<Node, Integer> linkedNodes;
 	private long weight;
-	private Map<Node, Integer> linkedNodes;
+	private boolean visited;
 
 	public Node(long n, long weight) {
 		this.n = n;
 		this.weight = weight;
+		this.visited = false;
 		this.linkedNodes = new HashMap<>();
 	}
 
@@ -72,15 +87,19 @@ class Node {
 	}
 
 	public void visit() {
-		weight = 0;
+		visited = true;
 	}
 
 	public boolean isNotVisited() {
-		return weight != 0;
+		return !visited;
 	}
 
 	public long getWeight() {
 		return weight;
+	}
+
+	public long getN() {
+		return n;
 	}
 
 	public void addWeight(long weight) {
