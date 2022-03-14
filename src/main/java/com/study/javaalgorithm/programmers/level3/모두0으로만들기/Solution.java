@@ -1,13 +1,15 @@
 package com.study.javaalgorithm.programmers.level3.모두0으로만들기;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
-import java.util.Queue;
 import java.util.Set;
 
 
 public class Solution {
+
+	private long sum;
+	private long count;
+
 	public long solution(int[] a, int[][] edges) {
 		if (weightSum(a) != 0) {
 			return -1;
@@ -30,8 +32,9 @@ public class Solution {
 			tree[y].addNode(tree[x]);
 		}
 
+		/* bfs 풀이 - 실패
 		// queue 는 Leaf 로 초기화한다.
-		Queue<Node> nextNodes = new LinkedList<>();
+		Queue<Node> nextNodes = new PriorityQueue<>();
 
 		for (Node node : tree) {
 			if (node.getLinkedNodes().size() == 1 && node.getN() != 0) {
@@ -40,28 +43,49 @@ public class Solution {
 		}
 
 		return bfs(nextNodes);
+		*/
+
+		calChildWeight(tree[0]);
+		return count;
 	}
 
-	public long bfs(Queue<Node> nextNodes) {
+
+	//dfs
+	public long calChildWeight(Node node) {
+		node.visit();
+
+		for (Node childNode : node.getLinkedNodes()) {
+			if (childNode.isNotVisited()) {
+				node.addWeight(calChildWeight(childNode));
+			}
+		}
+
+		count += Math.abs(node.getWeight());
+
+		return node.getWeight();
+	}
+
+	/*public long bfs(Queue<Node> nextNodes) {
 		long count = 0;
 		while (!nextNodes.isEmpty()) {
-			Node currentNode = nextNodes.poll();
+			currentNode = nextNodes.poll();
 			currentNode.visit();
 
 			for(Node parentNode : currentNode.getLinkedNodes()) {
 				if (parentNode.isNotVisited()) {
 					parentNode.addWeight(currentNode.getWeight());
 					count = count + Math.abs(currentNode.getWeight());
+
 					nextNodes.add(parentNode);
 				}
 			}
 		}
 
 		return count;
-	}
+	}*/
 
-	private int weightSum(int[] a) {
-		int sum = 0;
+	private long weightSum(int[] a) {
+		sum = 0;
 		for (int i : a) {
 			sum += i;
 		}
