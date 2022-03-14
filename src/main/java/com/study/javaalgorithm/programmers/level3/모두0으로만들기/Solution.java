@@ -1,25 +1,30 @@
 package com.study.javaalgorithm.programmers.level3.모두0으로만들기;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 
 public class Solution {
 
-	private long sum;
-	private long count;
+	static Node[] tree = null;
+	static long sum = 0;
+	static long count = 0;
+	static int x = 0;
+	static int y = 0;
 
-	public long solution(int[] a, int[][] edges) {
+	public static long solution(int[] a, int[][] edges) {
 		if (weightSum(a) != 0) {
 			return -1;
 		}
 
 		// 노드 초기화
-		Node[] tree = new Node[a.length];
+		tree = new Node[a.length];
 		for (int i = 0; i < edges.length; i = i + 1) {
-			int x = edges[i][0];
-			int y = edges[i][1];
+			x = edges[i][0];
+			y = edges[i][1];
 
 			if (tree[x] == null) {
 				tree[x] = new Node(x, a[x]);
@@ -34,7 +39,7 @@ public class Solution {
 
 		/* bfs 풀이 - 실패
 		// queue 는 Leaf 로 초기화한다.
-		Queue<Node> nextNodes = new PriorityQueue<>();
+		Queue<Node> nextNodes = new LinkedList<>();
 
 		for (Node node : tree) {
 			if (node.getLinkedNodes().size() == 1 && node.getN() != 0) {
@@ -51,7 +56,7 @@ public class Solution {
 
 
 	//dfs
-	public long calChildWeight(Node node) {
+	public static long calChildWeight(Node node) {
 		node.visit();
 
 		for (Node childNode : node.getLinkedNodes()) {
@@ -84,7 +89,7 @@ public class Solution {
 		return count;
 	}*/
 
-	private long weightSum(int[] a) {
+	private static long weightSum(int[] a) {
 		sum = 0;
 		for (int i : a) {
 			sum += i;
