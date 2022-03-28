@@ -6,8 +6,6 @@ public class Solution {
 		int[] answer = new int[queries.length];
 		int[][] map = initMap(rows, columns);
 
-		printMap(map);
-
 		for (int i = 0; i < queries.length; i++) {
 			int[] query = queries[i]; // 범위
 			int startX = query[0] - 1;
@@ -45,8 +43,6 @@ public class Solution {
 			}
 			answer[i] = min;
 		}
-
-		printMap(map);
 
 		return answer;
 	}
