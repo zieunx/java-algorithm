@@ -38,10 +38,9 @@ public class Solution {
 		if (candidates.isEmpty()) {
 			return 1;
 		}
-
-		// TODO: 응시자가 거리두기를 지키는지 확인
+		
 		for (Tuple candidate : candidates) {
-			if(isFollowingRuleBy(waitingRoom, candidate)) {
+			if(!isFollowingRuleBy(waitingRoom, candidate)) {
 				return 0;
 			}
 		}
@@ -50,30 +49,29 @@ public class Solution {
 	}
 
 	public boolean isFollowingRuleBy(char[][] waitingRoom, Tuple startCandidate) {
-		Queue<Tuple> queue = new LinkedList<>();
-		queue.add(startCandidate);
+		Queue<Tuple> searchAround = new LinkedList<>(); // 상하좌우를 탐색할 대상을 넣는 Queue
+		searchAround.add(startCandidate);
 
-		while (!queue.isEmpty()) {
-			Tuple currentCandidate = queue.poll();
+		while (!searchAround.isEmpty()) {
+			Tuple candidate = searchAround.poll();
+
 			for (Direction direction : Direction.values()) {
-				int nextX = currentCandidate.x + direction.x;
-				int nextY = currentCandidate.y + direction.y;
-				if (currentCandidate.isInRangeBy(waitingRoom)) {
+				Tuple nextCandidate = new Tuple(candidate.x + direction.x,candidate.y + direction.y, candidate.depth + 1);
+				if (!nextCandidate.isInRangeBy(waitingRoom) ||
+					(startCandidate.x == nextCandidate.x && startCandidate.y == nextCandidate.y)) {
 					continue;
 				}
-				char alpa = waitingRoom[nextX][nextY];
-				if (alpa == 'X') {
-					return true;
-				} else if (alpa == 'P') {
+
+				char alpha = waitingRoom[nextCandidate.x][nextCandidate.y];
+				if (alpha == 'P') {
 					return false;
-				} else if (currentCandidate.depth < 2) {
-					queue.add(new Tuple(nextX, nextY, currentCandidate.depth + 1));
-				} else {
-					return true;
+				}
+				if (nextCandidate.depth < 2 && alpha == 'O') {
+					searchAround.add(nextCandidate);
 				}
 			}
 		}
-		return false;
+		return true;
 	}
 
 	static class Tuple {
@@ -93,10 +91,10 @@ public class Solution {
 	}
 
 	enum Direction {
-		RIGHT(1, 0),
-		DOWN(0, 1),
-		LEFT(-1, 0),
-		UP(0, -1),
+		RIGHT(0, 1),
+		DOWN(-1, 0),
+		LEFT(0, -1),
+		UP(1, 0),
 		;
 
 		private final int x;
