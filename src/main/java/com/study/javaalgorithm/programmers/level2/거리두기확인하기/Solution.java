@@ -1,9 +1,12 @@
 package com.study.javaalgorithm.programmers.level2.거리두기확인하기;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class Solution {
+
 	public List<Integer> solution(String[][] places) {
 		List<Integer> answer = new ArrayList<>();
 
@@ -26,7 +29,7 @@ public class Solution {
 			for (int j = 0; j < place[0].length(); j++) {
 				waitingRoom[i][j] = place[i].charAt(j);
 				if (place[i].charAt(j) == 'P') {
-					candidates.add(new Tuple(i, j));
+					candidates.add(new Tuple(i, j, 0));
 				}
 			}
 		}
@@ -36,18 +39,72 @@ public class Solution {
 			return 1;
 		}
 
-		// TODO: 응시자간 거리 체크
+		// TODO: 응시자가 거리두기를 지키는지 확인
+		for (Tuple candidate : candidates) {
+			if(isFollowingRuleBy(waitingRoom, candidate)) {
+				return 0;
+			}
+		}
 
-		return 0;
+		return 1;
 	}
-}
 
-class Tuple {
-	private int x;
-	private int y;
+	public boolean isFollowingRuleBy(char[][] waitingRoom, Tuple startCandidate) {
+		Queue<Tuple> queue = new LinkedList<>();
+		queue.add(startCandidate);
 
-	public Tuple(int x, int y) {
-		this.x = x;
-		this.y = y;
+		while (!queue.isEmpty()) {
+			Tuple currentCandidate = queue.poll();
+			for (Direction direction : Direction.values()) {
+				int nextX = currentCandidate.x + direction.x;
+				int nextY = currentCandidate.y + direction.y;
+				if (currentCandidate.isInRangeBy(waitingRoom)) {
+					continue;
+				}
+				char alpa = waitingRoom[nextX][nextY];
+				if (alpa == 'X') {
+					return true;
+				} else if (alpa == 'P') {
+					return false;
+				} else if (currentCandidate.depth < 2) {
+					queue.add(new Tuple(nextX, nextY, currentCandidate.depth + 1));
+				} else {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	static class Tuple {
+		private final int x;
+		private final int y;
+		private final int depth;
+
+		public Tuple(int x, int y, int depth) {
+			this.x = x;
+			this.y = y;
+			this.depth = depth;
+		}
+
+		public boolean isInRangeBy(char[][] waitingRoom) {
+			return 0 <= x && 0 <= y && x < waitingRoom.length && y < waitingRoom[0].length;
+		}
+	}
+
+	enum Direction {
+		RIGHT(1, 0),
+		DOWN(0, 1),
+		LEFT(-1, 0),
+		UP(0, -1),
+		;
+
+		private final int x;
+		private final int y;
+
+		Direction(int x, int y) {
+			this.x = x;
+			this.y = y;
+		}
 	}
 }
