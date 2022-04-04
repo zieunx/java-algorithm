@@ -27,8 +27,11 @@ class SolutionTest {
 
 		return Stream.of(
 			new TestCase(new int[][] {{0, 0, 0}, {1, 0, 0}, {0, 1, 1}}, new int[][] {{1, 1, 1}, {1, 1, 0}, {1, 0, 1}}, true),
-			new TestCase(new int[][] {{0, 0, 0}, {1, 0, 0}, {0, 1, 1}}, new int[][] {{1, 1, 1}, {1, 1, 1}, {1, 1, 1}}, false),
-			new TestCase(new int[][] {{1, 1, 1}, {1, 1, 1}, {1, 1, 1}}, new int[][] {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}, true)
+			new TestCase(new int[][] {{0, 0, 0}, {1, 0, 0}, {0, 1, 1}}, new int[][] {{1, 1, 1}, {1, 1, 1}, {1, 1, 1}}, true),
+			new TestCase(new int[][] {{1, 1, 1}, {1, 1, 1}, {1, 1, 1}}, new int[][] {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}, true),
+			new TestCase(new int[][] {{0, 0, 0}, {1, 0, 0}, {0, 1, 1}}, new int[][] {{1, 1, 1}, {1, 1, 1}, {0, 0, 0}}, false),
+			new TestCase(new int[][] {{0, 0, 0}, {1, 0, 0}, {0, 1, 1}}, new int[][] {{1, 1, 1}, {1, 0, 1}, {0, 0, 0}}, false),
+			new TestCase(new int[][] {{0, 0, 0}, {1, 0, 0}, {0, 1, 1}}, new int[][] {{1, 1, 1}, {1, 0, 1}, {0, 0, 0}}, false)
 		).map(
 			it -> DynamicTest.dynamicTest(
 				"자물쇠와열쇠 solution",

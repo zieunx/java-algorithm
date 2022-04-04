@@ -27,7 +27,7 @@ public class Solution {
 		}
 
 		if (!containLockHole) {
-			return false;
+			return true;
 		}
 
 		// printLock(extensionLock);
@@ -48,6 +48,8 @@ public class Solution {
 	}
 
 	private boolean canOpenLock(int[][] extensionLock, int[][] key, int x, int y) {
+		// 준규가 찾아줌
+		// 자물쇠 자체에 0 이 없어야 함. 확장자물쇠를 copy 하여 copy 에 0 이 있는지 확인하는 부분 필요했음.
 		int[][] copyExtensionLock = new int[extensionLock.length][extensionLock.length];
 		for (int i = 0; i < extensionLock.length; i++) {
 			for (int j = 0; j < extensionLock.length; j++) {
@@ -58,16 +60,12 @@ public class Solution {
 		// System.out.println("(x, y) : " + x + ", " + y);
 		for (int i = x; i < x + key.length; i++) {
 			for (int j = y; j < y + key.length; j++) {
-
-				boolean isExternalArea = copyExtensionLock[i][j] == -1;
-				if (isExternalArea) {
-					// 여기서 예외
-					continue;
-				}
 				boolean isFitHole = (copyExtensionLock[i][j] == 0 && key[i - x][j - y] == 1) ||
 					(copyExtensionLock[i][j] == 1 && key[i- x][j - y] == 0);
 				if (isFitHole) {
-					copyExtensionLock[i][j] = 1;;
+					copyExtensionLock[i][j] = 1;
+				} else if (copyExtensionLock[i][j] == 1 && key[i - x][j - y] == 1) { // 준규가 찾아줌
+					copyExtensionLock[i][j] = 0;
 				}
 			}
 		}
