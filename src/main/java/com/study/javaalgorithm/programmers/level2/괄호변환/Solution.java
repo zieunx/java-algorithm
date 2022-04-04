@@ -11,42 +11,42 @@ public class Solution {
 			return p;
 		}
 
-		return balanceToRight(p);
+		return changeRight(p);
 	}
 
-	public String balanceToRight(String text) {
-		if (text.length() == 0) {
-			return text;
+	public String changeRight(String brackets) {
+		if (brackets.length() == 0) {
+			return brackets;
 		}
-		int uIndex = findUEndIndex(text);
+		int uIndex = findUEndIndex(brackets);
 
-		String u = text.substring(0, uIndex + 1);
-		String v = text.substring(uIndex + 1);
+		String u = brackets.substring(0, uIndex + 1);
+		String v = brackets.substring(uIndex + 1);
 
 		if (isRight(u)) {
-			return u + balanceToRight(v);
+			return u + changeRight(v);
 		}
 
-		return changeU(u, balanceToRight(v));
+		return createU(u, v);
 	}
 
-	private String changeU(String u, String alrightV) {
-		return "(" + alrightV + ")" + changeWrap(u.substring(1, u.length() - 1));
+	private String createU(String u, String v) {
+		return "(" + changeRight(v) + ")" + toggleBuckets(u.substring(1, u.length() - 1));
 	}
 
-	private String changeWrap(String parentheses) {
-		StringBuilder replaceParentheses = new StringBuilder();
-		for(int i = 0; i < parentheses.length(); i++) {
-			replaceParentheses.append(parentheses.charAt(i) == '(' ? ')' : '(');
+	private String toggleBuckets(String buckets) {
+		StringBuilder replaceBuckets = new StringBuilder();
+		for(int i = 0; i < buckets.length(); i++) {
+			replaceBuckets.append(buckets.charAt(i) == '(' ? ')' : '(');
 		}
-		return replaceParentheses.toString();
+		return replaceBuckets.toString();
 	}
 
-	public int findUEndIndex(String text) {
-		char startChar = text.charAt(0);
+	public int findUEndIndex(String buckets) {
+		char startBucket = buckets.charAt(0);
 		int count = 0;
-		for (int i = 0; i < text.length(); i++) {
-			if (startChar == text.charAt(i)) {
+		for (int i = 0; i < buckets.length(); i++) {
+			if (startBucket == buckets.charAt(i)) {
 				count++;
 			} else {
 				count--;
