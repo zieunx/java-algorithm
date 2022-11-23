@@ -16,16 +16,16 @@ public class Solution {
     static class Test {
         public int solution(int[] arrayA, int[] arrayB) {
             int answer = 0;
-            List<Integer> squareRootFromA = calculateSquareRoot(arrayA);
-            List<Integer> squareRootFromB = calculateSquareRoot(arrayB);
+            List<Integer> commonDivisorFromA = calculateCommonDivisor(arrayA);
+            List<Integer> commonDivisorFromB = calculateCommonDivisor(arrayB);
 
-            for (int card : squareRootFromA) {
+            for (int card : commonDivisorFromA) {
                 // A의 공약수가 있다면, B는 모든 숫자가 나눠지지 않는지만 확인하면 된다.
                 if (cantDivideAll(card, arrayB)) {
                     answer = Math.max(card, answer);
                 }
             }
-            for (int card : squareRootFromB) {
+            for (int card : commonDivisorFromB) {
                 // B의 공약수가 있다면, A는 모든 숫자가 나눠지지 않는지만 확인하면 된다.
                 if (cantDivideAll(card, arrayA)) {
                     answer = Math.max(card, answer);
@@ -35,9 +35,8 @@ public class Solution {
             return answer;
         }
 
-        private List<Integer> calculateSquareRoot(int[] array) {
+        private List<Integer> calculateCommonDivisor(int[] array) {
             List<Integer> list = new ArrayList<>();
-
             int min = array[0];
 
             while (min > 0) {
