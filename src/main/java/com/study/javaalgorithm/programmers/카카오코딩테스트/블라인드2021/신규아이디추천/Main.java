@@ -52,7 +52,7 @@ public class Main {
 
         // 7단계
         if (s.length() <= 2) {
-            s = s + String.valueOf(s.charAt(s.length() - 1)).repeat(3 - s.length());
+//            s = s + String.valueOf(s.charAt(s.length() - 1)).repeat(3 - s.length());
         }
 
 

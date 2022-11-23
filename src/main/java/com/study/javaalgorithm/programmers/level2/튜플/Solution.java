@@ -15,7 +15,7 @@ public class Solution {
             Set<Integer> tuple = new HashSet<>();
             tupleText = tupleText.replaceAll("\\{", "");
             Stream.of(tupleText.split(","))
-                    .filter(text -> !text.isBlank())
+                    .filter(text -> !text.isEmpty())
                     .forEach(text -> tuple.add(Integer.valueOf(text)));
             list.add(tuple);
         }
