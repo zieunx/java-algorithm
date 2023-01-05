@@ -1,4 +1,4 @@
-package com.study.javaalgorithm.codility.lesson2;
+package com.study.javaalgorithm.codility.lesson2_arrays;
 
 import java.util.HashMap;
 
