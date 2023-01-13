@@ -1,4 +1,4 @@
-package com.study.javaalgorithm.codility.lesson2;
+package com.study.javaalgorithm.codility.lesson2_arrays;
 
 public class CyclicRotation2 {
     public static void main(String[] args) {
