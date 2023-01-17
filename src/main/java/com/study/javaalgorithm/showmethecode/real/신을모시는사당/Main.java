@@ -16,21 +16,32 @@ public class Main {
 
         int max = 0;
 
-        for (int t = 0; t < N; t++) {
-            for (int i = 0; i < N - t; i++) {
-                System.out.printf("%d 부터 %d 까지\n", i, N - t);
-                int count = 0;
-                for (int j = i; j < N - t; j++) {
-                    if (Integer.parseInt(rocks[j]) == 1) {
-                        count += 1;
-                    } else {
-                        count -= 1;
-                    }
-                }
-                max = Math.max(max, Math.abs(count));
+        int leftCount = 0;
+        int rightCount = 0;
+        for (int i = 0; i < N; i++) {
+            int rock = Integer.parseInt(rocks[i]);
+            if (isLeft(rock)) {
+                leftCount += 1;
+                rightCount -= 1;
+            } else {
+                rightCount += 1;
+                leftCount -= 1;
             }
+
+            if (leftCount < 0) {
+                leftCount = 0;
+            }
+            if (rightCount < 0) {
+                rightCount = 0;
+            }
+
+            max = Math.max(max, Math.max(leftCount, rightCount));
         }
 
         System.out.println(max);
+    }
+
+    private static boolean isLeft(int rock) {
+        return rock == 1;
     }
 }
