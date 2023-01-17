@@ -13,15 +13,16 @@ public class Main {
         int[] inputs = Arrays.stream(input().split(" "))
                 .mapToInt(Integer::parseInt)
                 .toArray();
+        int[] remembers = new int[N];
 
-        int max = -1000;
-        int sum = 0;
-        for (int i = 0; i < N; i++) {
-            for (int j = i; j < N; j++) {
-                sum += inputs[j];
-                max = Math.max(max, sum);
-            }
-            sum = 0;
+        int max = inputs[0];
+        remembers[0] = max;
+        for (int i = 1; i < N; i++) {
+            int remember = Math.max(inputs[i], remembers[i -1] + inputs[i]);
+
+            max = Math.max(remember, max);
+            System.out.println("remember = " + remember);
+            remembers[i] = remember;
         }
 
         System.out.println(max);
