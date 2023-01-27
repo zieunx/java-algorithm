@@ -1,4 +1,4 @@
-package com.study.javaalgorithm.programmers.카카오코딩테스트.뉴스클러스터링;
+package com.study.javaalgorithm.programmers.카카오코딩테스트.블라인드2018.뉴스클러스터링;
 
 import java.util.HashMap;
 import java.util.Map;

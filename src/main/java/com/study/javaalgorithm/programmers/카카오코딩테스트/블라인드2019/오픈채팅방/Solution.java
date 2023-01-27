@@ -1,4 +1,4 @@
-package com.study.javaalgorithm.programmers.카카오코딩테스트.오픈채팅방;
+package com.study.javaalgorithm.programmers.카카오코딩테스트.블라인드2019.오픈채팅방;
 
 import java.util.*;
 
